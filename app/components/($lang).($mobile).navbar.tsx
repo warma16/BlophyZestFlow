@@ -21,7 +21,7 @@ export default function Index() {
                         <ul className="flex space-x-6">
                             <li>
                                 <CustomLink
-                                    to="home"
+                                    to="/home"
                                     className={`text-gray-800 hover:text-gray-500 ${getLinkClass("home")}`}
                                 >
                                     首页
@@ -29,7 +29,7 @@ export default function Index() {
                             </li>
                             <li>
                                 <CustomLink
-                                    to="about"
+                                    to="/about"
                                     className={`text-gray-800 hover:text-gray-500 ${getLinkClass("about")}`}
                                 >
                                     关于
