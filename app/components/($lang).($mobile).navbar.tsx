@@ -1,10 +1,10 @@
-import { useState, useRef } from 'react';
-import { Link, useLocation } from '@remix-run/react';
-import { pathConfig } from '~/lib/config';
+import {useRef, useState} from 'react';
+import {Link, useLocation} from '@remix-run/react';
+import {pathConfig} from '~/lib/config';
 import CustomLink from '~/components/CustomLink';
-import { motion } from 'framer-motion';
+import {motion} from 'framer-motion';
 
-export default function Index() {
+export default function Navbar() {
     const [hovered, setHovered] = useState(false); // 控制是否显示 Nova
     const location = useLocation(); // 获取当前的 URL
     const currentPath = location.pathname;
@@ -36,9 +36,9 @@ export default function Index() {
                         onMouseLeave={handleMouseLeave}  // 鼠标离开时触发隐藏
                     >
                         <motion.div
-                            initial={{ x: 0 }}
-                            whileHover={{ x: -5 }}
-                            transition={{ duration: 0.3, delay: 0.3 }}
+                            initial={{x: 0}}
+                            whileHover={{x: -5}}
+                            transition={{duration: 0.3, delay: 0.3}}
                         >
                             <Link to="/" className="text-2xl font-bold text-gray-800" ref={blophyRef}>
                                 Blophy
@@ -49,9 +49,9 @@ export default function Index() {
                         {/* Nova 文字区域 */}
                         <motion.div
                             className="text-2xl font-bold text-gray-800"
-                            initial={{ opacity: 0 }}  // 默认隐藏
-                            animate={{ opacity: hovered ? 1 : 0 }}  // 根据悬停状态动态显示
-                            transition={{ duration: 0.3, delay: 0.3 }}  // 延迟显示Nova
+                            initial={{opacity: 0}}  // 默认隐藏
+                            animate={{opacity: hovered ? 1 : 0}}  // 根据悬停状态动态显示
+                            transition={{duration: 0.3, delay: 0.3}}  // 延迟显示Nova
                             ref={novaRef}
                         >
                             <Link to="/" className="">

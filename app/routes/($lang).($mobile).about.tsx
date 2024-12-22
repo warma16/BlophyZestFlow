@@ -1,42 +1,29 @@
-import {useLocation} from "@remix-run/react";
-import {useEffect, useState} from "react";
-import Navbar from "~/components/($lang).($mobile).navbar";
-import LimeNetworkLight from "public/LimeNetworkLight.jpg";
-import LimeNetworkDark from "public/LimeNetworkDark.jpg";
-
-export function MobilePage() {
-    return <>
-        <Navbar/>
-        <div>
-
-        </div>
-    </>
-}
-
-export function Page() {
-    return <>
-        <Navbar/>
-        <div>
-            <picture>
-                <source media="(prefers-color-scheme: light)" srcSet={LimeNetworkLight}/>
-                <source media="(prefers-color-scheme: dark)" srcSet={LimeNetworkDark}/>
-                <img src="LimeNetworkLight.jpg" alt="Image based on color scheme"/>
-            </picture>
-
-        </div>
-    </>
-}
-
 export default function Layout() {
-    const [mobile, setMobile] = useState(false);
-    const location = useLocation();
-
-    useEffect(() => {
-        const isMobile = location.pathname.includes('mobile');
-        setMobile(isMobile);
-    }, [location]);
-
     return <div className={`relative pt-16`}>
-    {mobile ? <MobilePage/> : <Page/>}
+        <div>
+            <h1 className="mt-4 content-center text-center text-4xl text-black">
+                Blophy Forum
+            </h1>
+            <h2 className="mt-4 content-center text-center text-2xl text-black">
+                ---开发---
+            </h2>
+            <ul className="mt-3 content-center text-center text-black">
+                <li>Lime Network/MojaveHao</li>
+            </ul>
+            <h2 className="mt-4 content-center text-center text-2xl text-black">
+                ---运营---
+            </h2>
+            <ul className="mt-3 content-center text-center text-black">
+                <li>青檸網路 Lime Network</li>
+            </ul>
+            <h2 className="mt-4 content-center text-center text-2xl text-black">
+                ---Details---
+            </h2>
+            <ul className="mt-3 content-center text-center text-black">
+                <li>Github: BlophyNova/ZestFlow</li>
+                <li>Citrus: BlophyNova/Citrus</li>
+                <li>Version: ZestFlow EAP & Citrus EAP</li>
+            </ul>
+        </div>
     </div>;
 }

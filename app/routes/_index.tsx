@@ -1,8 +1,8 @@
 // app/routes/_index.tsx
 
-import { LoaderFunction, redirect } from "@remix-run/node";
+import {LoaderFunction, redirect} from "@remix-run/node";
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
     const userAgent = request.headers.get('User-Agent') || '';
     const isMobile = /mobile/i.test(userAgent); // 检测是否为移动设备
 

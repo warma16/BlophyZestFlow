@@ -1,10 +1,8 @@
 import {useLocation} from "@remix-run/react";
 import {useEffect, useState} from "react";
-import Navbar from "~/components/($lang).($mobile).navbar";
 
 export function MobilePage() {
     return <>
-        <Navbar/>
         <div>
             
         </div>
@@ -13,7 +11,6 @@ export function MobilePage() {
 
 export function Page() {
     return <>
-        <Navbar/>
         <div>
             
         </div>

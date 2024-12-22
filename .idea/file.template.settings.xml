@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ExportableFileTemplateSettings">
     <default_templates>
-      <template name="Remix Component.tsx" file-name="(${DS}lang).(${DS}mobile).${FileName}" reformat="false" live-template-enabled="true" />
+      <template name="Remix Mono Page.tsx" file-name="(${DS}lang).(${DS}mobile).${FileName}" reformat="true" live-template-enabled="true" />
+      <template name="Remix Page.tsx" file-name="(${DS}lang).(${DS}mobile).${FileName}" reformat="true" live-template-enabled="true" />
     </default_templates>
   </component>
 </project>
