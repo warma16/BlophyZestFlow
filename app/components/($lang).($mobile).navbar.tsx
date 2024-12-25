@@ -3,6 +3,7 @@ import {Link, useLocation} from '@remix-run/react';
 import {pathConfig} from '~/lib/config';
 import CustomLink from '~/components/CustomLink';
 import {motion} from 'framer-motion';
+import Avatar from "~/components/($lang).($mobile).avatar";
 
 export default function Navbar() {
     const [hovered, setHovered] = useState(false); // 控制是否显示 Nova
@@ -10,7 +11,7 @@ export default function Navbar() {
     const currentPath = location.pathname;
 
     // 根据路径配置来判断当前路径
-    const getLinkClass = (name: string) => pathConfig[name](currentPath) ? 'border-b-2 border-blue-500' : '';
+    const getLinkClass = (name: string) => pathConfig[name](currentPath) ? 'border-b-2 border-blue-600' : '';
 
     // 创建 ref 用于 Blophy 和 Nova
     const blophyRef = useRef(null);
@@ -29,33 +30,32 @@ export default function Navbar() {
         <div>
             <header className="fixed top-0 left-0 w-full bg-white bg-opacity-60 backdrop-blur-sm shadow-md z-10">
                 <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-                    {/* 包裹 Blophy 和 Nova 文字的容器 */}
                     <div
                         className="relative flex items-center"
-                        onMouseEnter={handleMouseEnter}  // 鼠标进入时触发显示
-                        onMouseLeave={handleMouseLeave}  // 鼠标离开时触发隐藏
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
                     >
                         <motion.div
                             initial={{x: 0}}
                             whileHover={{x: -5}}
                             transition={{duration: 0.3, delay: 0.3}}
                         >
-                            <Link to="/" className="text-2xl font-bold text-gray-800" ref={blophyRef}>
-                                Blophy
+                            <Link to="/" className="font-blophy text-2xl text-gray-800" ref={blophyRef}>
+                                blophy
                             </Link>
                         </motion.div>
 
 
                         {/* Nova 文字区域 */}
                         <motion.div
-                            className="text-2xl font-bold text-gray-800"
-                            initial={{opacity: 0}}  // 默认隐藏
-                            animate={{opacity: hovered ? 1 : 0}}  // 根据悬停状态动态显示
-                            transition={{duration: 0.3, delay: 0.3}}  // 延迟显示Nova
+                            className="text-2xl font-bold text-yellow-400"
+                            initial={{opacity: 0}}
+                            animate={{opacity: hovered ? 1 : 0}}
+                            transition={{duration: 0.3, delay: 0.3}}
                             ref={novaRef}
                         >
-                            <Link to="/" className="">
-                                Nova
+                            <Link to="/" className="font-blophy">
+                                nova
                             </Link>
                         </motion.div>
                     </div>
@@ -65,7 +65,7 @@ export default function Navbar() {
                             <li>
                                 <CustomLink
                                     to="/home"
-                                    className={`text-gray-800 hover:text-gray-500 ${getLinkClass("home")}`}
+                                    className={`text-gray-800 hover:text-gray-500 ${getLinkClass("home")} hover:border-b-2 border-blue-300`}
                                 >
                                     首页
                                 </CustomLink>
@@ -73,11 +73,12 @@ export default function Navbar() {
                             <li>
                                 <CustomLink
                                     to="/about"
-                                    className={`text-gray-800 hover:text-gray-500 ${getLinkClass("about")}`}
+                                    className={`text-gray-800 hover:text-gray-500 ${getLinkClass("about")} hover:border-b-2 border-blue-300`}
                                 >
                                     关于
                                 </CustomLink>
                             </li>
+                            <li><Avatar/></li>
                         </ul>
                     </nav>
                 </div>

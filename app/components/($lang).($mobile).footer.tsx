@@ -2,7 +2,7 @@ import CustomLink from "~/components/CustomLink";
 
 export default function Footer() {
 
-    return <footer className="bg-gray-800 text-white py-4">
+    return <footer className="py-4">
         <div className="container mx-auto text-center">
             <p>Copyleft LimeNetwork and all contributors 2024.</p>
             <p>Blophy开源论坛项目 支持:support@blophy.net</p>

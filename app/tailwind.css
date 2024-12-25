@@ -10,3 +10,11 @@ body {
         color-scheme: dark;
     }
 }
+
+@font-face {
+    font-family: 'Blophy';
+    /*noinspection CssUnknownTarget*/
+    src: url('/fonts/Blophy.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

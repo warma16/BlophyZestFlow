@@ -1,3 +1,5 @@
+import {Link} from "@remix-run/react";
+
 export default function Layout() {
     return <div className={`relative pt-16`}>
         <div>
@@ -20,8 +22,8 @@ export default function Layout() {
                 ---Details---
             </h2>
             <ul className="mt-3 content-center text-center text-black">
-                <li>Github: BlophyNova/ZestFlow</li>
-                <li>Citrus: BlophyNova/Citrus</li>
+                <li>Github: <Link to="https://github.com/BlophyNova/ZestFlow" className= "text-blue-400 hover:underline mx-2">BlophyNova/ZestFlow</Link></li>
+                <li>Citrus: <Link to="https://github.com/BlophyNova/Citrus" className= "text-blue-400 hover:underline mx-2">BlophyNova/Citrus</Link></li>
                 <li>Version: ZestFlow EAP & Citrus EAP</li>
             </ul>
         </div>
