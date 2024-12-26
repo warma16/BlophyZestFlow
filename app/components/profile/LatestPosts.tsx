@@ -46,7 +46,8 @@ export default function LatestPosts() {
                 </svg>
                 <h1>Latest Posts</h1>
             </div>
-            <SubCard title="My latest post!" description="Click here to navigate to the about page." target="/zh/about"/>
+            <SubCard title="My latest post!" description="Click here to navigate to the about page."
+                     target="/zh/about"/>
 
         </div>
     </div>

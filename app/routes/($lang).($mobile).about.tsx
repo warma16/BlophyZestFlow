@@ -1,7 +1,7 @@
 import {Link} from "@remix-run/react";
 
 export default function Layout() {
-    return <div className={`relative pt-16`}>
+    return <div className="font-jetbrains relative pt-16">
         <div>
             <h1 className="mt-4 content-center text-center text-4xl text-black">
                 Blophy Forum

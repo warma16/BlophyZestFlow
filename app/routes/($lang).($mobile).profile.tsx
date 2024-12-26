@@ -6,7 +6,8 @@ import LatestPosts from "~/components/profile/LatestPosts";
 export function MobilePage() {
     return <>
         <div>
-
+            <UserCard/>
+            <LatestPosts/>
         </div>
     </>
 }
@@ -15,7 +16,7 @@ export function Page() {
     return <>
         <div>
             <UserCard/>
-            <LatestPosts />
+            <LatestPosts/>
         </div>
     </>
 }
