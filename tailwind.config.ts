@@ -17,7 +17,8 @@ export default {
                     "Segoe UI Symbol",
                     "Noto Color Emoji",
                 ],
-                blophy: ['Blophy']
+                blophy: ['Blophy'],
+                jetbrains: ['"JetBrains Mono"', 'monospace'],
             },
         },
     },

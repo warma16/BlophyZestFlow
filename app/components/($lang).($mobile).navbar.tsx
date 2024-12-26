@@ -1,9 +1,9 @@
 import {useRef, useState} from 'react';
-import {Link, useLocation} from '@remix-run/react';
-import {pathConfig} from '~/lib/config';
-import CustomLink from '~/components/CustomLink';
 import {motion} from 'framer-motion';
-import Avatar from "~/components/($lang).($mobile).avatar";
+import {Link, useLocation} from '@remix-run/react';
+import Avatar from "~/components/($lang).($mobile).avatar"; // 注意路径
+import CustomLink from './CustomLink';
+import {pathConfig} from "~/lib/config";
 
 export default function Navbar() {
     const [hovered, setHovered] = useState(false); // 控制是否显示 Nova
@@ -45,7 +45,6 @@ export default function Navbar() {
                             </Link>
                         </motion.div>
 
-
                         {/* Nova 文字区域 */}
                         <motion.div
                             className="text-2xl font-bold text-yellow-400"
@@ -78,7 +77,10 @@ export default function Navbar() {
                                     关于
                                 </CustomLink>
                             </li>
-                            <li><Avatar/></li>
+                            {/* 头像区域 */}
+                            <li className="relative"> {/* 给头像区域加上相对定位 */}
+                                <Avatar/>
+                            </li>
                         </ul>
                     </nav>
                 </div>

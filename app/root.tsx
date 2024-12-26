@@ -29,6 +29,10 @@ export function LayoutWrapper() {
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <Meta/>
             <Links/>
+            <link
+                href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap"
+                rel="stylesheet"
+            />
         </head>
         <body className="flex flex-col min-h-screen">
         <Navbar/>
