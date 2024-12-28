@@ -20,7 +20,7 @@ export default function UserCard() {
                             Abstract Person
                         </div>
                         <div className="flex ml-7 w-full">
-                            <progress className="progress mt-1.5" value="100" max="100"></progress>
+                            <progress className="progress themed-gradient mt-1.5" value="90" max="100"></progress>
                         </div>
                     </div>
                 </div>

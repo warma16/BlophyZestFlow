@@ -47,7 +47,7 @@ export default function Navbar() {
 
                         {/* Nova 文字区域 */}
                         <motion.div
-                            className="text-2xl font-bold text-yellow-400"
+                            className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-green-500 text-transparent bg-clip-text"
                             initial={{opacity: 0}}
                             animate={{opacity: hovered ? 1 : 0}}
                             transition={{duration: 0.3, delay: 0.3}}

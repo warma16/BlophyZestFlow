@@ -22,3 +22,8 @@ body {
 code, pre {
     font-family: 'JetBrains Mono', monospace;
 }
+
+.themed-gradient {
+    background: darkgray;
+    content: linear-gradient(70deg, #49D4F1, #B4F744);
+}
