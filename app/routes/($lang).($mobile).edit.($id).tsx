@@ -27,9 +27,9 @@ export function Page({params}:{params:Params}) {
     console.log(params)
     if(params["code"]==-1){
         return <>
-        <div>
-            你没有给定文章id
-        </div>
+        <section>
+            没有文章id，请返回
+        </section>
     </>
     }
     return <>

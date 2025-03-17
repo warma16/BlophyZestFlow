@@ -1,5 +1,6 @@
 import {useLocation} from "@remix-run/react";
 import {useEffect, useState} from "react";
+import { DemoCarousel } from "~/components/Carousel";
 
 export function MobilePage() {
     return <>
@@ -8,6 +9,7 @@ export function MobilePage() {
 
 export function Page() {
     return <>
+        <DemoCarousel/>
     </>
 }
 
