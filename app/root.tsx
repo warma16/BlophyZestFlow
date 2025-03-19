@@ -36,7 +36,21 @@ export function LayoutWrapper() {
         </head>
         <body className="flex flex-col min-h-screen">
         <Navbar/>
-        <main className="flex-grow"><Outlet/></main>
+        <main className="flex-grow">
+            <div>
+                <div className="relative pt-16 h-full w-full">
+                    <div>
+                    <div className="relative pt-16 h-full w-full">
+                        <div>
+                        <Outlet/>
+                        </div>
+                        
+                    </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </main>
         <Footer/>
         <ScrollRestoration/>
         <Scripts/>

@@ -1,14 +1,23 @@
-import { useState, useEffect, useRef, JSX } from "react";
+import { useState, useEffect, useRef } from "react";
 
-type SlideContent = {
+type Slide = {
   id: string;
-  content: JSX.Element;
+  background: string;
+  content: React.ReactNode;
 };
 
-export function Carousel({ slides }: { slides: SlideContent[] }) {
+type CarouselProps = {
+  slides: Slide[];
+  width?: string;
+  height?: string;
+  addingClassName?: string;
+};
+
+export function Carousel({ slides, width = "", height = "",addingClassName="" }: CarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const carouselRef = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<NodeJS.Timeout>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const slideRef = useRef<HTMLDivElement>(null);
 
   // 自动播放控制
   const startAutoPlay = () => {
@@ -16,9 +25,7 @@ export function Carousel({ slides }: { slides: SlideContent[] }) {
   };
 
   const stopAutoPlay = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
+    intervalRef.current && clearInterval(intervalRef.current);
   };
 
   const handleNext = () => {
@@ -29,120 +36,117 @@ export function Carousel({ slides }: { slides: SlideContent[] }) {
     setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length);
   };
 
-  // 滚动到当前幻灯片
+  // 处理指示点点击
+  const handleDotClick = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  // 自动播放逻辑
   useEffect(() => {
-    if (carouselRef.current) {
-      const slideWidth = carouselRef.current.clientWidth;
-      carouselRef.current.scrollTo({
+    startAutoPlay();
+    return stopAutoPlay;
+  }, []);
+  useEffect(() => {
+    if (slideRef.current) {
+      const slideWidth = slideRef.current.clientWidth;
+      slideRef.current.scrollTo({
         left: slideWidth * currentSlide,
         behavior: "smooth"
       });
     }
   }, [currentSlide]);
 
-  // 自动播放逻辑
-  useEffect(() => {
-    startAutoPlay();
-    return () => stopAutoPlay();
-  }, []);
-
   return (
     <div 
-      className="carousel w-full relative"
-      ref={carouselRef}
+      className={`absolute overflow-hidden ${addingClassName}`}
+      ref={containerRef}
       onMouseEnter={stopAutoPlay}
       onMouseLeave={startAutoPlay}
     >
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          id={slide.id}
-          className="carousel-item relative w-full"
-          style={{ scrollSnapAlign: "start" }}
-        >
-          <div className="w-full p-4">
-            {slide.content}
+      {/* 幻灯片内容 */}
+      <div className="relative h-full transition-transform duration-500">
+        {slides.map((slide, index) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 ${index === currentSlide ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
+            ref={slideRef}
+          >
+            {/* 背景层 */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${slide.background})` }}
+            />
+            
+            {/* 内容遮罩层 */}
+            <div className="absolute inset-0 bg-black/30" />
+            
+            {/* 内容容器 */}
+            <div className="relative h-full flex items-center justify-center text-white">
+              {slide.content}
+            </div>
           </div>
+        ))}
+      </div>
 
-          {/* 导航控制 */}
-          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 bottom-1">
-            <div className="flex items-center space-x-2 bottom ">
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentSlide(i)}
-                  className={`w-3 h-3 rounded-full ${
-                    i === currentSlide ? "bg-primary" : "bg-gray-300"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <button
-              onClick={handlePrev}
-              className="btn btn-circle shadow-lg hover:scale-110 transition-transform"
-            >
-              ❮
-            </button>
-            <div className="flex items-center space-x-2 bottom ">
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentSlide(i)}
-                  className={`w-3 h-3 rounded-full ${
-                    i === currentSlide ? "bg-primary" : "bg-gray-300"
-                  }`}
-                />
-              ))}
-            </div>
-            <button
-              onClick={handleNext}
-              className="btn btn-circle shadow-lg hover:scale-110 transition-transform"
-            >
-              ❯
-            </button>
-          </div>
-        </div>
-      ))}
+      {/* 导航按钮 */}
+      <button
+        onClick={handlePrev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 btn btn-circle shadow-lg bg-white/30 hover:bg-white/50 backdrop-blur-sm"
+      >
+        ❮
+      </button>
+      <button
+        onClick={handleNext}
+        className="absolute right-4 top-1/2 -translate-y-1/2 btn btn-circle shadow-lg bg-white/30 hover:bg-white/50 backdrop-blur-sm"
+      >
+        ❯
+      </button>
+
+      {/* 指示点 */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => handleDotClick(index)}
+            className={`w-3 h-3 rounded-full transition-colors ${
+              index === currentSlide 
+                ? 'bg-white shadow-md' 
+                : 'bg-white/50 hover:bg-white/70'
+            }`}
+          />
+        ))}
+      </div>
     </div>
   );
 }
 
 // 使用示例
 export function DemoCarousel() {
-  const slides: SlideContent[] = [
+  const slides: Slide[] = [
     {
-      id: "feature-1",
+      id: "slide-1",
+      background: "https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp",
       content: (
-        <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-8 rounded-xl">
-          <h2 className="text-4xl font-bold mb-4">Feature 1</h2>
-          <p className="text-lg mb-6">Interactive dashboard with real-time analytics</p>
-          <button className="btn btn-outline btn-accent">
-            Learn More →
-          </button>
+        <div className="text-center max-w-2xl">
+          <h2 className="text-4xl font-bold mb-4">Discover New Features</h2>
+          <p className="text-xl mb-6">Explore our latest updates and improvements</p>
+          <button className="btn btn-primary px-8">Get Started</button>
         </div>
       )
     },
     {
-      id: "feature-2",
+      id: "slide-2",
+      background: "https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp",
       content: (
-        <div className="bg-gradient-to-r from-green-500 to-cyan-500 text-white p-8 rounded-xl">
-          <div className="flex items-center gap-4">
-            <div className="flex-1">
-              <h2 className="text-4xl font-bold mb-4">Feature 2</h2>
-              <ul className="list-disc pl-6 mb-6">
-                <li>Advanced data visualization</li>
-                <li>Custom report generation</li>
-                <li>Team collaboration tools</li>
-              </ul>
-            </div>
-            <div className="flex-1 bg-white/20 rounded-lg p-4">
-              <img 
-                src="/chart-demo.svg" 
-                className="w-full h-48 object-contain" 
-                alt="Chart preview"
-              />
+        <div className="flex items-center gap-8 p-6">
+          <div className="flex-1">
+            <h3 className="text-3xl font-bold mb-4">Advanced Analytics</h3>
+            <p className="text-lg mb-4">Deep insights into your data with real-time monitoring</p>
+            <div className="stats shadow bg-white/20 text-white">
+              <div className="stat">
+                <div className="stat-title">Active Users</div>
+                <div className="stat-value">89.4%</div>
+              </div>
             </div>
           </div>
         </div>
@@ -150,5 +154,10 @@ export function DemoCarousel() {
     }
   ];
 
-  return <Carousel slides={slides} />;
+  return (
+    <Carousel 
+      slides={slides}
+      addingClassName="w-full h-full"
+    />
+  );
 }

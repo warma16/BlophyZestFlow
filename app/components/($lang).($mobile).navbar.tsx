@@ -27,7 +27,6 @@ export default function Navbar() {
     };
 
     return (
-        <div>
             <header className="fixed top-0 left-0 w-full bg-white bg-opacity-60 backdrop-blur-sm shadow-md z-10">
                 <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
                     <div
@@ -85,6 +84,5 @@ export default function Navbar() {
                     </nav>
                 </div>
             </header>
-        </div>
     );
 }
