@@ -3,6 +3,7 @@
 import {Links, Meta, Outlet, Scripts, ScrollRestoration,} from "@remix-run/react";
 import type {LinksFunction} from "@remix-run/node";
 
+
 import "./tailwind.css";
 import Navbar from "~/components/($lang).($mobile).navbar";
 import Footer from "~/components/($lang).($mobile).footer";
@@ -36,19 +37,9 @@ export function LayoutWrapper() {
         </head>
         <body className="flex flex-col min-h-screen">
         <Navbar/>
-        <main className="flex-grow">
-            <div>
-                <div className="relative pt-16 h-full w-full">
-                    <div>
-                    <div className="relative pt-16 h-full w-full">
-                        <div>
-                        <Outlet/>
-                        </div>
-                        
-                    </div>
-                    </div>
-                    
-                </div>
+        <main className="flex-grow pt-20">  {/* 预留导航栏高度 */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <Outlet/>
             </div>
         </main>
         <Footer/>

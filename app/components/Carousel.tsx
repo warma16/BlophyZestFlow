@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 
-type Slide = {
+export type Slide = {
   id: string;
   background: string;
   content: React.ReactNode;
 };
 
-type CarouselProps = {
+export type CarouselProps = {
   slides: Slide[];
   width?: string;
   height?: string;
@@ -157,7 +157,7 @@ export function DemoCarousel() {
   return (
     <Carousel 
       slides={slides}
-      addingClassName="w-full h-full"
+      addingClassName="left w-1/2 h-1/2"
     />
   );
 }
